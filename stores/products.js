@@ -4,7 +4,7 @@ import { axiosAPi } from "~/config/axios";
 export const useProductStore = defineStore("product", {
   state: () => ({
     products: [],
-    allproducts:[]
+    AllProducts:[]
   }),
 
   actions: {
@@ -13,10 +13,10 @@ export const useProductStore = defineStore("product", {
       this.products = response.data;
     },
 
-    async fetchAllproducts() {
+    async fetchAllProducts() {
       try {
-        let response = await axiosAPi.get("products?limit=5");
-        this.products = response.data;
+        let response = await axiosAPi.get("products");
+        this.AllProducts = response.data;
       } catch (e) {
         console.warn(e);
       }
