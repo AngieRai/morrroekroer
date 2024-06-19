@@ -5,7 +5,7 @@
     <section>
       <v-container>
         <div class="text-right py-5">
-          <v-btn to="/products/store">Add <v-icon>mid-plus</v-icon></v-btn>
+          <v-btn to="/products/store">Add <v-icon>mdi-plus</v-icon></v-btn>
         </div>
         <v-table>
           <thead>
@@ -28,11 +28,11 @@
               <td>{{ product.category }}</td>
               <td>
                 <div class="d-flex">
-                  <nuxt-link class="px-2">
-                    <v-btn size="small"> <v-icon>mdi-pencil</v-icon></v-btn>
+                  <nuxt-link class="px-2" :to="`/products/${product.id}`">
+                    <v-icon>mdi-pencil</v-icon>
                   </nuxt-link>
                   <nuxt-link>
-                    <v-btn size="small"> <v-icon>mdi-delete</v-icon></v-btn>
+                   <v-icon>mdi-delete</v-icon>
                   </nuxt-link>
                 </div>
               </td>
@@ -56,5 +56,9 @@ h1 {
   color: purple;
   text-align: center;
   padding: 10px;
+}
+
+a{
+  color: purple;
 }
 </style>

@@ -5,6 +5,7 @@ export const useProductStore = defineStore("product", {
   state: () => ({
     products: [],
     AllProducts: [],
+    product: null,
   }),
 
   actions: {
@@ -36,5 +37,34 @@ export const useProductStore = defineStore("product", {
         console.warn(e);
       }
     },
+
+    async fetchSingleProducts(id) {
+      try {
+        let response = await axiosAPi.get(`products/${id}`);
+        this.product = response.data;
+      } catch (e) {
+        console.warn(e);
+      }
+    },
+    async updateProduct(id, data) {
+      try {
+        let response = await axiosAPi.put(`/products/${id}`, data);
+        if (response.status == 200)
+          {
+          alert("Product Updated");
+        window.location.reload();
+          }
+       else{
+        alert("Something went Wrong!")
+       }
+      } catch (e) {
+        console.warn(e);
+      }
+    },
+    // trying my own shit
+    // async deleteProduct(id){
+    //   let response = await axiosAPi.delete("/products/${product.id}");
+    //   this.products = response.data;
+    // }
   },
 });
