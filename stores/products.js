@@ -59,8 +59,25 @@ export const useProductStore = defineStore("product", {
        }
       } catch (e) {
         console.warn(e);
+        alert("Something went Wrong!")
       }
     },
+
+    async deleteProduct(id){
+      try{
+           let response = await axiosAPi.delete(`/products/${id}`)
+           if(response.status == 200) {
+            alert("Product deleted!");
+            window.location.reload();
+           }
+           else{
+            alert("Something went Wrong!")
+           };
+      }catch(e){
+           console.warn(e);
+           alert("Something went Wrong!")
+      }
+    }
     // trying my own shit
     // async deleteProduct(id){
     //   let response = await axiosAPi.delete("/products/${product.id}");

@@ -32,7 +32,7 @@
                     <v-icon>mdi-pencil</v-icon>
                   </nuxt-link>
                   <nuxt-link>
-                   <v-icon>mdi-delete</v-icon>
+                   <v-icon @click="productStore.deleteProduct(product.id)">mdi-delete</v-icon>
                   </nuxt-link>
                 </div>
               </td>
