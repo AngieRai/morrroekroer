@@ -13,7 +13,7 @@
           </v-col>
         </v-row>
 
-        <v-btn @click="productStore.postProduct(userData)">
+        <v-btn @click="authStore.login(userData)">
           Login
         </v-btn>
       </v-container>
@@ -27,8 +27,8 @@ const userData = ref({
     password: "83r5^_",
 });
 
-import { useProductStore } from "~/stores/products";
-const productStore = useProductStore();
+import { useauthStore } from "~/stores/auth";
+const authStore = useauthStore();
 </script>
 
 <style scoped></style>

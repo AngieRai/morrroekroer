@@ -1,87 +1,37 @@
 import { defineStore } from "pinia";
-import { axiosAPi } from "~/config/axios";
+// import { axiosAPi } from "~/config/axios";
 
-export const useProductStore = defineStore("product", {
+export const useauthStore = defineStore("auth", {
   state: () => ({
-    products: [],
-    AllProducts: [],
-    product: null,
+    token: null,
   }),
 
   actions: {
-    async fetchProducts() {
-      let response = await axiosAPi.get("products?limit=5");
-      this.products = response.data;
-    },
-
-    async fetchAllProducts() {
+    async login(userData) {
+      console.warn(userData);
       try {
-        let response = await axiosAPi.get("products");
-        this.AllProducts = response.data;
-      } catch (e) {
-        console.warn(e);
-      }
-    },
+        let response = await axios.post(
+          "https://fakestoreapi.com/auth/login",
+          userData
+        );
 
-    async postProduct(productData) {
-      try {
-        let response = await axiosAPi.post("products", productData);
         if (response.status == 200) {
-          alert("Product Added Successfully!");
-          console.warn(response.data);
-          navigateTo("/products");
+          this.token = response.data.token;
+          localStorage.setItem("token", this.token);
+          alert("login successfull!");
+          navigateTo("/");
         } else {
-          alert("Something went Wrong!");
+          alert("Usernmae or password is incorrect");
         }
       } catch (e) {
-        console.warn(e);
+        alert("Usernmae or password is incorrect");
+        console.warn(response);
       }
     },
-
-    async fetchSingleProducts(id) {
-      try {
-        let response = await axiosAPi.get(`products/${id}`);
-        this.product = response.data;
-      } catch (e) {
-        console.warn(e);
-      }
-    },
-    async updateProduct(id, data) {
-      try {
-        let response = await axiosAPi.put(`/products/${id}`, data);
-        if (response.status == 200)
-          {
-          alert("Product Updated");
-        window.location.reload();
-          }
-       else{
-        alert("Something went Wrong!")
-       }
-      } catch (e) {
-        console.warn(e);
-        alert("Something went Wrong!")
-      }
-    },
-
-    async deleteProduct(id){
-      try{
-           let response = await axiosAPi.delete(`/products/${id}`)
-           if(response.status == 200) {
-            alert("Product deleted!");
-            window.location.reload();
-           }
-           else{
-            alert("Something went Wrong!")
-           };
-      }catch(e){
-           console.warn(e);
-           alert("Something went Wrong!")
-      }
-    }
-    // trying my own shit
-    // async deleteProduct(id){
-    //   let response = await axiosAPi.delete("/products/${product.id}");
-    //   this.products = response.data;
-    // }
   },
+  // trying my own shit
+  // async deleteProduct(id){
+  //   let response = await axiosAPi.delete("/products/${product.id}");
+  //   this.products = response.data;
+  // }
 });
